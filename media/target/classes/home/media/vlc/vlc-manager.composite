@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<composite xmlns="http://www.osoa.org/xmlns/sca/1.0"  
+  xmlns:frascati="http://frascati.ow2.org/xmlns/sca/1.1"
+  targetNamespace="http://home/media/"
+  name="vlc-manager-composite">
+  
+  <service name="vlc-manager-service" promote="vlc-manager-component/vlc-manager-service">     
+	  <interface.java interface="home.media.vlc.VlcManager"/>
+  </service>
+  
+	<reference name="os-command-service" promote="vlc-manager-component/os-command-service">
+	 	<interface.java interface="home.os.command.CommandProcessor"/>
+	</reference>
+    
+  <component name="vlc-manager-component">  
+    <service name="vlc-manager-service">
+       <interface.java interface="home.media.vlc.VlcManager"/> 
+    </service>     
+    <reference name="os-command-service">
+    	<interface.java interface="home.os.command.CommandProcessor"/>
+    </reference>     
+		<implementation.java class="home.media.vlc.VlcManagerImpl"/>    
+  </component> 
+
+</composite>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<composite xmlns="http://www.osoa.org/xmlns/sca/1.0"  
+  xmlns:frascati="http://frascati.ow2.org/xmlns/sca/1.1"
+  xmlns:home_web_media_vlc="home/web/media/vlc"
+  targetNamespace="http://home/web/"
+  name="home-web-composite">
+
+	<component name="home-web-component">
+		<implementation.composite name="home_web_media_vlc:vlc-web.composite" />
+	</component>
+
+</composite>

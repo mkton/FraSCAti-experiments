@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="list_app" version="1.0"
+    xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:home_web="home/web/"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+  <display-name>list_app is a wonderful reminder</display-name>
+
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+  
+  <!-- OW2 FraSCAti Servlet -->
+  <servlet>
+    <servlet-name>FraSCAtiServlet</servlet-name>
+    <servlet-class>org.ow2.frascati.factory.servlet.FraSCAtiServlet</servlet-class>
+    <init-param>
+      <param-name>composite</param-name>
+      <!-- Here is the list of composites to start. -->
+      <param-value>home/web/home-web</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <!--<servlet>
+  	<servlet-name>GoServlet</servlet-name>
+  	<servlet-class>home.list.web.GoServlet</servlet-class>
+  </servlet>
+  -->
+  
+  <servlet-mapping>
+    <servlet-name>FraSCAtiServlet</servlet-name>
+    <!-- Here is the url pattern where SCA WS and RESTful bindings are exposed. -->
+    <url-pattern>/resources/*</url-pattern>
+  </servlet-mapping>
+
+	<!--<servlet-mapping>
+		<servlet-name>GoServlet</servlet-name>
+		<url-pattern>/go</url-pattern>		
+	</servlet-mapping>	
+	-->
+	
+</web-app>

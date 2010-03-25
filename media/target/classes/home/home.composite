@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<composite xmlns="http://www.osoa.org/xmlns/sca/1.0"  
+  xmlns:frascati="http://frascati.ow2.org/xmlns/sca/1.1"
+  xmlns:home_os_command="home/os/command"
+  xmlns:home_media_vlc="home/media/vlc"
+  targetNamespace="http://home/os/"
+  name="home-composite">
+  
+  <service name="vlc-manager-service" promote="vlc-manager-component/vlc-manager-service">     
+	  <interface.java interface="home.media.vlc.VlcManager"/>
+	  <frascati:binding.rmi host="localhost" serviceName="rmi-vlc-manager-service" port="1099"/>
+  </service>    
+     
+  <component name="os-command-composite">
+  	<service name="os-command-service" >
+  		<interface.java interface="home.os.command.CommandProcessor" />
+  	</service>
+  	<implementation.composite name="home_os_command:os-command.composite"/>
+  </component>
+  
+  <component name="vlc-manager-component">  
+    <service name="vlc-manager-service">
+       <interface.java interface="home.media.vlc.VlcManager"/>
+    </service>     
+    <reference name="os-command-service">
+    	<interface.java interface="home.os.command.CommandProcessor"/>
+    </reference>
+    <implementation.composite name="home_media_vlc:vlc-manager.composite"/>
+   </component>
+   
+   <wire source="vlc-manager-component/os-command-service" target="os-command-composite/os-command-service" />
+    
+</composite>

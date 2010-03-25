@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>VLC Manager</title>
+<link rel="icon" type="image/png" href="favicon.png" />
+</head>
+<body>
+
+<script language="JavaScript">
+
+function executeRESTAction(action) {
+  try {
+    var xhr = new XMLHttpRequest(); 
+    xhr.open("GET", "resources/vlc/" + action , false); 
+    xhr.send(null); 
+    //document.counter.value.value = xhr.responseText
+  } catch(e) {
+    alert(e);
+  }
+}
+
+</script>
+
+<h1>
+	VLC Manager
+</h1>
+
+<form>
+  <input type="button" value="Run http interface" onclick="executeRESTAction('runHttp')">  
+  <br />
+  <input type="button" value="Listen to UDP stream" onclick="executeRESTAction('listenToStream')">
+  <br />  
+  <input type="button" value="Stop vlc" onclick="executeRESTAction('stop')">    
+</form>
+
+</body>
+</html>

@@ -1,0 +1,230 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>component-library</groupId>
+  <artifactId>media</artifactId>
+  <packaging>jar</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  <name>Home Media Library</name>
+      
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  
+  <build>
+    <defaultGoal>package</defaultGoal>
+    <plugins>
+     	
+    
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>       
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.4.2</version>
+        <configuration>
+         <skipTests>false</skipTests>
+         <useSystemClassLoader>false</useSystemClassLoader>
+        </configuration>
+      </plugin>            
+  	</plugins>
+  </build>
+  
+  <repositories>
+      <!-- ObjectWeb Release Repository  -->
+    <repository>
+      <id>objectweb-release</id>
+      <name>ObjectWeb Maven Repository</name>
+      <url>http://maven.objectweb.org/maven2</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <!-- ObjectWeb Snapshot Repository  -->
+    <repository>
+      <id>objectweb-snapshot</id>
+      <name>ObjectWeb Maven Repository</name>
+      <url>http://maven.objectweb.org/maven2-snapshot 
+      </url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+    </repository>
+    <!-- JSON dependency - absorb -->
+    <repository>
+     <id>tuscany</id>
+     <url>http://svn.apache.org/repos/asf/tuscany/maven</url>
+   </repository>
+  </repositories>
+  
+      
+  <dependencies>  
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.6</version>
+      <scope>test</scope>
+    </dependency>    
+    <dependency>
+      <groupId>org.ow2.frascati.factory</groupId>
+      <artifactId>frascati-factory-plugin</artifactId>
+      <version>1.3-SNAPSHOT</version>
+    </dependency>
+		<dependency>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils</artifactId>
+      <version>1.7.0</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-collections</groupId>
+      <artifactId>commons-collections</artifactId>
+      <version>3.2</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.ow2.frascati</groupId>
+      <artifactId>frascati-binding-upnp</artifactId>
+      <version>1.3-SNAPSHOT</version>
+    </dependency>    
+    <dependency>
+      <groupId>org.ow2.frascati</groupId>
+      <artifactId>frascati-binding-rest</artifactId>
+      <version>1.3-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+  
+	<profiles>
+	  
+	  <profile>
+	    <id>home</id>    
+	    <build>
+	      <defaultGoal>org.ow2.frascati.factory:frascati-factory-plugin:1.3-SNAPSHOT:exec</defaultGoal>
+	      <plugins>
+	        <plugin>
+	          <groupId>org.ow2.frascati.factory</groupId>
+	          <artifactId>frascati-factory-plugin</artifactId>
+	          <executions>
+	            <execution>
+	              <phase>package</phase>
+	              <goals>
+	                <goal>exec</goal>
+	              </goals>
+	            </execution>
+	          </executions>
+	          <configuration>
+			    		<composite>home/home</composite>
+	          </configuration>
+	        </plugin> 
+	      </plugins>
+	    </build>
+	  </profile>
+	  
+	  <profile>
+	  	<id>home-alsamixer</id>    
+	    <build>
+	      <defaultGoal>org.ow2.frascati.factory:frascati-factory-plugin:1.3-SNAPSHOT:exec</defaultGoal>
+	      <plugins>
+	        <plugin>
+	          <groupId>org.ow2.frascati.factory</groupId>
+	          <artifactId>frascati-factory-plugin</artifactId>
+	          <executions>
+	            <execution>
+	              <phase>package</phase>
+	              <goals>
+	                <goal>exec</goal>
+	              </goals>
+	            </execution>
+	          </executions>
+	          <configuration>
+			    		<composite>home/home-alsamixer</composite>
+	          </configuration>
+	        </plugin> 
+	      </plugins>
+	    </build>
+	  </profile>
+	  
+	  <profile>
+	  	<id>alsamixer-client</id>    
+	    <build>
+	      <defaultGoal>org.ow2.frascati.factory:frascati-factory-plugin:1.3-SNAPSHOT:exec</defaultGoal>
+	      <plugins>
+	        <plugin>
+	          <groupId>org.ow2.frascati.factory</groupId>
+	          <artifactId>frascati-factory-plugin</artifactId>
+	          <executions>
+	            <execution>
+	              <phase>package</phase>
+	              <goals>
+	                <goal>exec</goal>
+	              </goals>
+	            </execution>
+	          </executions>
+	          <configuration>
+			    		<composite>home/media/alsamixer/client/alsamixer-client</composite>
+			    		<service>r</service>
+			   			<method>run</method>
+	          </configuration>
+	        </plugin> 
+	      </plugins>
+	    </build>
+	  </profile>
+	  
+		<profile>
+	    <id>vlc-rest</id>    
+	    <build>
+	      <defaultGoal>org.ow2.frascati.factory:frascati-factory-plugin:1.3-SNAPSHOT:exec</defaultGoal>
+	      <plugins>
+	        <plugin>
+	          <groupId>org.ow2.frascati.factory</groupId>
+	          <artifactId>frascati-factory-plugin</artifactId>
+	          <executions>
+	            <execution>
+	              <phase>package</phase>
+	              <goals>
+	                <goal>exec</goal>
+	              </goals>
+	            </execution>
+	          </executions>
+	          <configuration>
+			    		<composite>home/web/media/vlc/vlc-web</composite>
+	          </configuration>
+	        </plugin> 
+	      </plugins>
+	    </build>
+	  </profile>	  
+	  
+	 	<profile>	  
+	    <id>home-web</id>    
+	    <build>
+        <defaultGoal>war:war</defaultGoal>
+        <plugins>        
+      		<!-- Build the Web Application aRchive. -->
+      		<plugin>
+       			<groupId>org.apache.maven.plugins</groupId>
+       			<artifactId>maven-war-plugin</artifactId>
+     			</plugin>
+     		</plugins>
+	    </build>
+	  </profile>
+	  
+	</profiles>
+		
+</project>

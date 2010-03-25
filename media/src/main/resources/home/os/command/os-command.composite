@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<composite xmlns="http://www.osoa.org/xmlns/sca/1.0"  
+  xmlns:frascati="http://frascati.ow2.org/xmlns/sca/1.1"
+  targetNamespace="http://home/os/"
+  name="os-command-composite">
+
+	<service name="os-command-service" promote="os-command-component/os-command-service">
+		<interface.java interface="home.os.command.CommandProcessor" />
+	</service>
+   
+  <component name="os-command-component">
+  	<service name="os-command-service" >
+  		<interface.java interface="home.os.command.CommandProcessor" />
+  	</service>
+  	<implementation.java class="home.os.command.CommandProcessorImpl" />
+  </component>
+  
+</composite>
