@@ -17,7 +17,7 @@
     <reference name="alsamixer-manager-service">    
     	<interface.java interface="home.media.alsamixer.AlsamixerManager"/>
 	  	<!-- <frascati:binding.rmi host="localhost" serviceName="rmi-alsamixer-manager-service" port="1099"/> -->
-	  	<frascati:binding.upnp />
+	  	<!-- <frascati:binding.upnp /> -->
 	  </reference>
   </component>
 
