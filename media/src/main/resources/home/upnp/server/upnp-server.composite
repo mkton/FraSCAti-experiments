@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<composite xmlns="http://www.osoa.org/xmlns/sca/1.0"  
+  xmlns:upnp-ext="http://frascati.ow2.org/xmlns/upnp/1.0"	
+  xmlns:home_os_command="home/os/command"
+  xmlns:home_media_alsamixer="home/media/alsamixer"
+  targetNamespace="http://home/os/"
+  name="upnp-server">
+    
+  <service name="alsamixer-manager-service" promote="alsamixer-manager-component/alsamixer-manager-service">     
+	  <interface.java interface="home.media.alsamixer.AlsamixerManager"/>	  
+  </service>    
+     
+  <component name="os-command-composite">
+  	<service name="os-command-service" >
+  		<interface.java interface="home.os.command.CommandProcessor" />
+  	</service>
+  	<implementation.composite name="home_os_command:os-command.composite"/>
+  </component>
+  
+  <component name="alsamixer-manager-component">  
+    <service name="alsamixer-manager-service">
+       <interface.java interface="home.media.alsamixer.AlsamixerManager"/>
+       <upnp-ext:binding.upnp />
+    </service>     
+    <reference name="os-command-service">
+    	<interface.java interface="home.os.command.CommandProcessor"/>
+    </reference>
+    <implementation.composite name="home_media_alsamixer:alsamixer-manager.composite"/>
+   </component>
+   
+   <wire source="alsamixer-manager-component/os-command-service" target="os-command-composite/os-command-service" />
+    
+</composite>

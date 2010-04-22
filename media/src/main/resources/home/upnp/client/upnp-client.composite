@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<composite xmlns="http://www.osoa.org/xmlns/sca/1.0"
+	xmlns:frascati="http://frascati.ow2.org"
+  xmlns:upnp-ext="http://frascati.ow2.org/xmlns/upnp/1.0"  
+  targetNamespace="http://home/list/"
+  name="alsamixer-client-composite">
+  
+ 	<service name="r" promote="alsamixer-client-component/r">
+		<interface.java interface="java.lang.Runnable" />
+  </service>
+
+  <component name="alsamixer-client-component">
+    <service name="r">
+      <interface.java interface="java.lang.Runnable" />
+    </service>
+    <implementation.java class="home.media.alsamixer.client.AlsamixerCommandLineClientImpl"/>
+    <reference name="alsamixer-manager-service">    
+    	<interface.java interface="home.media.alsamixer.AlsamixerManager"/>	  	
+	  	<upnp-ext:binding.upnp />
+	  </reference>
+  </component>
+
+</composite>
